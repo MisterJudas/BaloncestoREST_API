@@ -1,16 +1,12 @@
-package com.briancalvo.repository;
+package com.eduardobenavides.repository;
 
-import com.briancalvo.domain.Player;
-import com.briancalvo.domain.Team;
+import com.eduardobenavides.domain.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Created by Brian on 10/10/2016.
+ * Created by Amilcar on 10/10/2016.
  */
 public interface PlayerRepository extends JpaRepository<Player,Long>{
 

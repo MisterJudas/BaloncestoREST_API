@@ -1,4 +1,4 @@
-package com.briancalvo.domain;
+package com.eduardobenavides.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 /**
- * Created by Brian on 10/10/2016.
+ * Created by Amilcar on 10/10/2016.
  */
 @Entity
 public class Team {

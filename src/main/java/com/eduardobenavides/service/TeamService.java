@@ -1,17 +1,14 @@
-package com.briancalvo.service;
+package com.eduardobenavides.service;
 
-import com.briancalvo.domain.Player;
-import com.briancalvo.domain.Team;
-import com.briancalvo.repository.PlayerRepository;
-import com.briancalvo.repository.TeamRepository;
+import com.eduardobenavides.domain.Team;
+import com.eduardobenavides.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /**
- * Created by Brian on 17/10/2016.
+ * Created by Amilcar on 17/10/2016.
  */
 @Service
 public class TeamService {

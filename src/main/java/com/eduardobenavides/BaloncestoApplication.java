@@ -1,7 +1,6 @@
-package com.briancalvo;
+package com.eduardobenavides;
 
-import com.briancalvo.service.PlayerService;
-import com.briancalvo.service.TeamService;
+import com.eduardobenavides.service.PlayerService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

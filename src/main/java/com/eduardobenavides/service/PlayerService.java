@@ -1,17 +1,13 @@
-package com.briancalvo.service;
+package com.eduardobenavides.service;
 
-import com.briancalvo.domain.Player;
-import com.briancalvo.domain.Team;
-import com.briancalvo.repository.PlayerRepository;
-import com.briancalvo.repository.TeamRepository;
+import com.eduardobenavides.domain.Player;
+import com.eduardobenavides.repository.PlayerRepository;
+import com.eduardobenavides.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
-
 /**
- * Created by Brian on 10/10/2016.
+ * Created by Amilcar on 10/10/2016.
  */
 @Service
 public class PlayerService {
@@ -24,25 +20,25 @@ public class PlayerService {
 
     public void testPlayers(){
 
-        Player player1 = new Player(1,"Lebron","James",26649);
+        Player player1 = new Player("Lebron","James",26649, 2333, 23221, "Pivot");
         playerRepository.save(player1);
 
-        Player player2 = new Player(2,"Kevin","Durant",7563);
+        Player player2 = new Player("Kevin","Durant",7563, 2059, 8806, "Alero");
         playerRepository.save(player2);
 
-        Player player3 = new Player(3,"Anthony","Davis",2266);
+        Player player3 = new Player("Anthony","Davis",2266, 8768, 6678, "Pivot");
         playerRepository.save(player3);
 
-        Player player4 = new Player(4,"Stephen","Curry",11088);
+        Player player4 = new Player("Stephen","Curry",11088, 6678, 23221, "Base");
         playerRepository.save(player4);
 
-        Player player5 = new Player(5,"James","Harden",8904);
+        Player player5 = new Player("James","Harden",8904, 3556, 8768, "Bsae");
         playerRepository.save(player5);
 
-        Player player6 = new Player(6,"Kevin","Love",9442);
+        Player player6 = new Player("Kevin","Love",9442, 87688, 36757, "Pivot");
         playerRepository.save(player6);
 
-        Player player7 = new Player(7,"Kyrie","Irving",6458);
+        Player player7 = new Player("Kyrie","Irving",6458, 8766, 8766, "Base");
         playerRepository.save(player7);
 
         System.out.println("");

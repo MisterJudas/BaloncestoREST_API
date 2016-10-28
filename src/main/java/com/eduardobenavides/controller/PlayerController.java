@@ -1,17 +1,15 @@
-package com.briancalvo.controller;
+package com.eduardobenavides.controller;
 
-import com.briancalvo.domain.Player;
-import com.briancalvo.repository.PlayerRepository;
+import com.eduardobenavides.domain.Player;
+import com.eduardobenavides.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Brian on 24/10/2016.
+ * Created by Amilcar on 24/10/2016.
  */
 @RestController
 @RequestMapping ("/players")

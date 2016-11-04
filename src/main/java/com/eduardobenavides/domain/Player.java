@@ -2,16 +2,20 @@ package com.eduardobenavides.domain;
 
 import javax.persistence.*;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 /**
  * Created by Amilcar on 10/10/2016.
  */
 @Entity
+/*@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name", "surname"})
+})*/
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true)
     private String name;
     private String surname;
     private int points;

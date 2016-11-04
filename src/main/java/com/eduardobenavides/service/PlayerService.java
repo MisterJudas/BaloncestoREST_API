@@ -48,6 +48,15 @@ public class PlayerService {
         System.out.println("");
         System.out.println("Players with greater or equal than 10.000 points");
         System.out.println(playerRepository.findByPointsGreaterThan(5000));
+
+    /*    System.out.println("");
+        System.out.println("Players with points between 5000 and 10000");
+        System.out.println(playerRepository.findByPointsBetween(5000, 10000));
+*/
+        System.out.println("");
+        System.out.println("Players with positionequals Base");
+        System.out.println(playerRepository.findByPositionEquals("Base"));
+
 /*
         System.out.println("");
         System.out.println("Players with number of assists between 2000 and 5000");

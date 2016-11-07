@@ -6,6 +6,8 @@ import com.eduardobenavides.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Amilcar on 10/10/2016.
  */
@@ -42,71 +44,27 @@ public class PlayerService {
         playerRepository.save(player7);
 
         System.out.println("");
+        System.out.println("Players with position equals Base");
+        System.out.println(playerRepository.findByPositionEquals("Base"));
+
+
+        System.out.println("");
         System.out.println("Player with name Lebron");
         System.out.println(playerRepository.findByName("Lebron"));
 
-        System.out.println("");
-        System.out.println("Players with greater or equal than 10.000 points");
+        System.out.println("--1--");
+        System.out.println("Players order by points");
+        System.out.println(playerRepository.findByOrderByPointsDesc());
+
+        System.out.println("--2--");
+        System.out.println("Players with greater or equal than 5.000 points");
         System.out.println(playerRepository.findByPointsGreaterThan(5000));
 
-    /*    System.out.println("");
+        System.out.println("--3--");
         System.out.println("Players with points between 5000 and 10000");
         System.out.println(playerRepository.findByPointsBetween(5000, 10000));
-*/
-        System.out.println("");
-        System.out.println("Players with positionequals Base");
-        System.out.println(playerRepository.findByPositionEquals("Base"));
 
-/*
-        System.out.println("");
-        System.out.println("Players with number of assists between 2000 and 5000");
-        System.out.println(playerRepository.findByAssistsBetween(2000,5000));
 
-        System.out.println("");
-        System.out.println("Players that play base position");
-        System.out.println(playerRepository.findByPosition("base"));
-
-        System.out.println("");
-        System.out.println("Players with born after 1990");
-        System.out.println(playerRepository.findByDateGreaterThan(LocalDate.of(1990,1,1)));
-
-        System.out.println("");
-        System.out.println("Average of Points, Rebounds and Assists by Positions");
-        List<Object[]> playerList = playerRepository.AvgPointsReboundsAssistsPerPosition();
-        for (Object[] player : playerList){
-            System.out.println("======================");
-            System.out.println("Position: "+player[0]);
-            System.out.println("Points: "+player[1]);
-            System.out.println("Rebounds: "+player[2]);
-            System.out.println("Assists: "+player[3]);
-        }
-
-        System.out.println("");
-        System.out.println("Average, Maximun and Minimun of Points, Rebounds and Assists by Position");
-        List<Object[]> playerList2 = playerRepository.AvgMaxMinPointsReboundsAssistsPerPosition();
-        for (Object[] player : playerList2){
-            System.out.println("=======================");
-            System.out.println("Position: "+player[0]);
-            System.out.println("AVG Points: "+player[1]);
-            System.out.println("MAX Points: "+player[2]+" - "+playerRepository.findByPoints((int)player[2]));
-            System.out.println("MIN Points: "+player[3]+" - "+playerRepository.findByPoints((int)player[3]));
-            System.out.println("AVG Rebounds: "+player[4]);
-            System.out.println("MAX Rebounds: "+player[5]+" - "+playerRepository.findByRebounds((int)player[5]));
-            System.out.println("MIN Rebounds: "+player[6]+" - "+playerRepository.findByRebounds((int)player[6]));
-            System.out.println("AVG Assists: "+player[7]);
-            System.out.println("MAX Assists: "+player[8]+" - "+playerRepository.findByAssists((int)player[8]));
-            System.out.println("MIN Assists: "+player[9]+" - "+playerRepository.findByAssists((int)player[9]));
-        }
-
-        System.out.println("");
-        System.out.println("The player of Golden State Warriors are: " +playerRepository.findPlayerByTeam(team2));
-
-        System.out.println("");
-        System.out.println("The player of Cleveland Cavaliers on ala-pivot position are: "+playerRepository.findPlayerPositionByTeam(team1,"ala-pivot"));
-
-        System.out.println("");
-        System.out.println("The max points player of Cleveland Cavaliers is: "+playerRepository.findMaxPointsPlayerByTeam(team2));
-        */
     }
 
 }

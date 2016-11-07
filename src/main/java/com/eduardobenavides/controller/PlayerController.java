@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Amilcar on 24/10/2016.
@@ -23,14 +24,18 @@ public class PlayerController {
     @Autowired
     private PlayerRepository playerRepository;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Player createPlayer(@RequestBody Player player) {
         return playerRepository.save(player);
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET)
+    @PutMapping
+    public Player updatePlayer(@RequestBody Player player) {
+        return playerRepository.save(player);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Player findById(@PathVariable Long id) {
         Player player = playerRepository.findOne(id);
         return player;
@@ -50,16 +55,11 @@ public class PlayerController {
 
     //Devolver todos los jugadores que han conseguido un número de canastas en un rango
     // determinado (mínimo y máximo).
-    /*@RequestMapping(value = "/byPointsBetween/{num, num}",
-            method = RequestMethod.GET)
-    public List<Player> findByPointsBetween(){
-        return playerRepository.findByPointsBetween(num, num);
-    }*/
-/*
-    @RequestMapping(value = "/byPointsBetween/{num-num}")
-    public List<Player> findByPointsBetween(@PathVariable Integer num){
-        return playerRepository.findByPointsBetween(num, num);
-    }*/
+    @GetMapping("/between/{points1}/{points2}")
+    public List<Player>findByPointsBetween(@PathVariable Integer points1, @PathVariable Integer points2){
+        return playerRepository.findByPointsBetween(points1, points2);
+    }
+
 
     //Devolver los jugadores agrupados por posición mediante un Map.
     @RequestMapping(value = "/byPosition/{position}")
@@ -71,16 +71,6 @@ public class PlayerController {
 
 
 
-
-   /* @RequestMapping(method = RequestMethod.GET)
-    public List<Team>findAll(){
-        List<Team> teams = new ArrayList<Team>();
-        Iterator<Team> iterator = teamRepository.findAll().iterator();
-        while(iterator.hasNext()){
-            team.add(iterator.next());
-        }
-        return teams;
-    }*/
 
 }
 

@@ -1,7 +1,10 @@
 package com.eduardobenavides.repository;
 
 import com.eduardobenavides.domain.Player;
+import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 import java.util.List;
 
 /**
@@ -13,39 +16,28 @@ public interface PlayerRepository extends JpaRepository<Player,Long>{
     //Spring Data Queries
 
     List<Player> findByName(String name);
-
     List<Player> findByPointsGreaterThanEqual(Integer points);
-
-    List<Player> findByPointsBetween(Integer min, Integer max);
-
-    List<Player> findByPointsGreaterThan(Integer points);
-
     List<Player> findByPoints(Integer points);
 
 
+    //1 ORDENAR POR NUMERO CANASTAS
     List<Player> findByOrderByPointsDesc();
 
-   // List<Player> findByPointsBetween();
+    //2 CANASTAS IGUAL O SUPERIOR A URL
+    List<Player> findByPointsGreaterThan(Integer points);
 
+    //3 CANASTAS ENTRE X/X PUNTOS
+    List<Player> findByPointsBetween(Integer min, Integer max);
+
+    //4 JUGADORES AGRUPADOS POR POSICION
     List<Player> findByPositionEquals(String position);
 
-    // JPL Queries
-/*
-    @Query("SELECT player.position,AVG(player.points),AVG(player.rebounds),AVG(player.assists) from Player player GROUP BY player.position")
-    List<Object[]> AvgPointsReboundsAssistsPerPosition();
+    //5 JUGADORES POR POSICION MOSTRANDO ESTADISTICAS
 
-    @Query("SELECT player.position,AVG(player.points),MAX(player.points),MIN(player.points),AVG(player.rebounds),MAX(player.rebounds),MIN(player.rebounds),AVG(player.assists),MAX(player.assists),MIN(player.assists) FROM Player player GROUP BY player.position")
-    List<Object[]> AvgMaxMinPointsReboundsAssistsPerPosition();
 
-    @Query("SELECT player FROM Player player WHERE player.team = :team")
-    List<Player> findPlayerByTeam(@Param("team") Team team);
+   /* @Query("SELECT player.position,AVG(player.points),MAX(player.points),MIN(player.points),AVG(player.rebounds),MAX(player.rebounds),MIN(player.rebounds),AVG(player.assists),MAX(player.assists),MIN(player.assists) FROM Player player GROUP BY player.position")
+    List<Object[]> AvgMaxMinPointsReboundsAssistsPerPosition();*/
 
-    @Query("SELECT player from Player player WHERE player.team = :team AND player.position = :position")
-    List<Player> findPlayerPositionByTeam(@Param("team") Team team, @Param("position") String position);
 
-    @Query("SELECT player from Player player WHERE player.team = :team AND player.points IN (SELECT MAX(player.points) FROM Player player WHERE player.team = :team)")
-    List<Player> findMaxPointsPlayerByTeam(@Param("team") Team team);
-
-*/
 
 }

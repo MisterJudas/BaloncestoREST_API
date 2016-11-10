@@ -16,7 +16,7 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public void testTeams(){
+    public void createTeams(){
         Team team1 = new Team(1,"Cavaliers","Cleveland", LocalDate.of(1970,10,12));
         teamRepository.save(team1);
 
@@ -38,11 +38,5 @@ public class TeamService {
         Team team7 = new Team(7,"Lakers","Los Angeles",LocalDate.of(1946,8,19));
         teamRepository.save(team7);
 
-        /*System.out.println(teamRepository.findOne(1L));
-        System.out.println(teamRepository.findByNameLike("Cavaliers"));*/
-        System.out.println("");
-        System.out.println("Teams location on Los Angeles");
-        System.out.println(teamRepository.findByLocation("Los Angeles"));
     }
-
 }

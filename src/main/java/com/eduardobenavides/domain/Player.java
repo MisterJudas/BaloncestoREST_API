@@ -1,8 +1,10 @@
 package com.eduardobenavides.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+import java.time.LocalDate;
 
 /**
  * Created by Amilcar on 10/10/2016.
@@ -18,27 +20,31 @@ public class Player {
     private Long id;
     private String name;
     private String surname;
+    @JsonIgnore
+    private LocalDate birthDate;
     private int points;
     private int assists;
     private int rebound;
-    private String position;
+    @Enumerated(EnumType.STRING)
+    private Position position;
 
-    // @ManyToOne // un jugador sólo puede pertenecer a un equipo
-    // private Team team;
+    @ManyToOne // un jugador sólo puede pertenecer a un equipo
+    private Team team;
+
+    public Player(){
+    }
 
     /* Constructores */
 
-    public Player(String name, String surname, int points, int assists, int rebound, String position) {
+    public Player(String name, String surname, LocalDate birthDate, int points, int assists, int rebound, Position position, Team team) {
         this.name = name;
         this.surname = surname;
+        this.birthDate = birthDate;
         this.points = points;
         this.assists = assists;
         this.rebound = rebound;
         this.position = position;
-    }
-
-
-    public Player() {
+        this.team = team;
     }
 
     public Long getId() {
@@ -65,6 +71,14 @@ public class Player {
         this.surname = surname;
     }
 
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public int getPoints() {
         return points;
     }
@@ -89,12 +103,20 @@ public class Player {
         this.rebound = rebound;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override
@@ -103,40 +125,12 @@ public class Player {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", birthDate=" + birthDate +
                 ", points=" + points +
                 ", assists=" + assists +
                 ", rebound=" + rebound +
-                ", position='" + position + '\'' +
+                ", position=" + position +
+                ", team=" + team +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Player player = (Player) o;
-
-        if (points != player.points) return false;
-        if (assists != player.assists) return false;
-        if (rebound != player.rebound) return false;
-        if (id != null ? !id.equals(player.id) : player.id != null) return false;
-        if (name != null ? !name.equals(player.name) : player.name != null) return false;
-        if (surname != null ? !surname.equals(player.surname) : player.surname != null) return false;
-        return position != null ? position.equals(player.position) : player.position == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (surname != null ? surname.hashCode() : 0);
-        result = 31 * result + points;
-        result = 31 * result + assists;
-        result = 31 * result + rebound;
-        result = 31 * result + (position != null ? position.hashCode() : 0);
-        return result;
-    }
 }
-

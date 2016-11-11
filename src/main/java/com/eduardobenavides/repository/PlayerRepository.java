@@ -55,12 +55,12 @@ public interface PlayerRepository extends JpaRepository<Player,Long>{
     List<Player> findByPointsBetween(Integer min, Integer max);
 
     //4 JUGADORES AGRUPADOS POR POSICION
-    @Query("select p.position, min(p.baskets), max(p.baskets), avg(p.baskets) from Player p group by p.position")
+    @Query("select p.position, min(p.points), max(p.points), avg(p.points) from Player p group by p.position")
     List<Object[]> groupByPosition();
 
     //5 JUGADORES POR POSICION MOSTRANDO ESTADISTICAS
-    @Query("select p from Player p order by p.baskets")
-    List<Player> playersByPositionBaskets();
+    @Query("select p from Player p order by p.points")
+    List<Player> playersByPositionPoints();
 
 
 

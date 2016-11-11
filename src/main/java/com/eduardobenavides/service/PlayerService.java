@@ -63,6 +63,15 @@ public class PlayerService {
         System.out.println(playerRepository.findByBirthDateAfter(LocalDate.of(2003, 10, 12)));
         System.out.println(playerRepository.findByPositionEquals(Position.Base));
 
+        playerRepository.findAvgOfPointsAssistsReboundByPosition().
+                forEach(player -> System.out.println(player[3]+", avg baskets: "+player[0]+", avg assists: "+player[1]+", avg rebound: "+player[2]));
+
+        playerRepository.findAvgMinMaxOfPointsAssistsReboundByPosition().
+                forEach(aux -> System.out.println(aux[0] +
+                        "\nBasket statistics -> avg: "+aux[1]+", max, "+aux[2]+", min "+aux[3]+
+                        "\nAssists statistics -> avg: "+aux[4]+", max, "+aux[5]+", min "+aux[6]+
+                        "\nRebound statistics -> avg: "+aux[7]+", max, "+aux[8]+", min "+aux[9]));
+
       /*  System.out.println("");
         System.out.println("Player with name Lebron");
         System.out.println(playerRepository.findByName("Lebron"));*/
@@ -79,14 +88,7 @@ public class PlayerService {
         System.out.println("Players with points between 5000 and 10000");
         System.out.println(playerRepository.findByPointsBetween(5000, 10000));
 
-        playerRepository.findAvgOfBasketsAssistsReboundByPosition().
-                forEach(player -> System.out.println(player[3]+", avg baskets: "+player[0]+", avg assists: "+player[1]+", avg rebound: "+player[2]));
 
-        playerRepository.findAvgMinMaxOfBasketsAssistsReboundByPosition().
-                forEach(aux -> System.out.println(aux[0] +
-                        "\nBasket statistics -> avg: "+aux[1]+", max, "+aux[2]+", min "+aux[3]+
-                        "\nAssists statistics -> avg: "+aux[4]+", max, "+aux[5]+", min "+aux[6]+
-                        "\nRebound statistics -> avg: "+aux[7]+", max, "+aux[8]+", min "+aux[9]));
+
     }
-
 }

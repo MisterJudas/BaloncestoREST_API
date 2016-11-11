@@ -1,13 +1,15 @@
 package com.eduardobenavides.controller;
 
-import com.eduardobenavides.domain.Player;
-import com.eduardobenavides.domain.Team;
-import com.eduardobenavides.repository.PlayerRepository;
-import org.omg.CORBA.Request;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.eduardobenavides.domain.Player;
+import com.eduardobenavides.domain.Position;
+import com.eduardobenavides.domain.Statistic;
+import com.eduardobenavides.repository.PlayerRepository;
 
 import java.util.*;
 
@@ -94,9 +96,9 @@ public class PlayerController {
     }
 
     // GET --> SHOW ALL THE PLAYERS WITH THE SAME POSITION ORDERED BY BASKETS 5
-    @GetMapping("/playersByPositionBaskets")
-    public Map<Position, Collection<Player>> playersByPositionBaskets(){
-        List<Player> players = playerRepository.playersByPositionBaskets();
+    @GetMapping("/playersByPositionPoints")
+    public Map<Position, Collection<Player>> playersByPositionPoints(){
+        List<Player> players = playerRepository.playersByPositionPoints();
 
         ListMultimap<Position, Player> playerMultiMap = ArrayListMultimap.create();
 

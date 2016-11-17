@@ -1,8 +1,11 @@
 package com.eduardobenavides.controller;
 
+import com.eduardobenavides.domain.Team;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.parsing.Location;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +33,7 @@ public class PlayerController {
         return playerRepository.save(player);
     }
 
-    @GetMapping
+   /* @GetMapping
     public List<Player> getAllPlayer(){
         List<Player> players = new ArrayList<Player>();
         Iterator<Player> iterator = playerRepository.findAll().iterator();
@@ -38,7 +41,7 @@ public class PlayerController {
             players.add(iterator.next());
         }
         return players;
-    }
+    }*/
 
     // DELETE
     @DeleteMapping("/{id}")
@@ -80,8 +83,7 @@ public class PlayerController {
         return playerRepository.findByPointsBetween(points1, points2);
     }
 
-
-    // GET --> AVG BASKETS, ASSISTS, REBOUND FROM ALL PLAYERS SAME POSITION 4
+    //Numero 4 GET --> AVG BASKETS, ASSISTS, REBOUND FROM ALL PLAYERS SAME POSITION 4
     @GetMapping("/byPosition")
     public Map<Position, Statistic> groupByPosition(){
         List<Object[]> players = playerRepository.groupByPosition();
@@ -94,6 +96,17 @@ public class PlayerController {
         }
         return posis;
     }
+
+   /* @GetMapping("/byLocation")
+    public Map(<Location, Team> groupByLocation(){
+     List<Object[]> teams = teamRepository.groupByLocation();
+
+        Map<Location, Team> locat = new HashMap<>();
+
+        for (Object[] p: teams){
+            TeamController aux = new Team(Location p[0], (d))
+        }*/
+
 
     // GET --> SHOW ALL THE PLAYERS WITH THE SAME POSITION ORDERED BY BASKETS 5
     @GetMapping("/playersByPositionPoints")
@@ -108,6 +121,17 @@ public class PlayerController {
 
         return playerMultiMap.asMap();
     }
+
+    @GetMapping
+    public List<Player> findAllOrderBy(@RequestParam(name = "orderBy", required = false) String orderBy){
+        if(orderBy != null) {
+            return playerRepository.findAll(new Sort(Sort.Direction.DESC, orderBy));
+        }
+        return playerRepository.findAll();
+    }
+
+    //Numero 5 Sort by location
+
 
 
 

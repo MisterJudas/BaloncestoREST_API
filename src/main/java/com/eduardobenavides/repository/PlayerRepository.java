@@ -17,9 +17,7 @@ public interface PlayerRepository extends JpaRepository<Player,Long>{
 
     //Spring Data Queries
 
-    /*List<Player> findByName(String name);
-    List<Player> findByPointsGreaterThanEqual(Integer points);
-    List<Player> findByPoints(Integer points);*/
+    List<Player> findByName(String name);
 
     // a. Buscar jugadores por nombre, de manera que no sea necesario introducir el nombre completo.
     List<Player> findByNameStartingWith(String name);

@@ -56,7 +56,8 @@ public class PlayerService {
 
 
     public void testPlayers() {
-        System.out.println("------------------------");
+
+       /* System.out.println("------------------------");
         System.out.println("FindByNameStartingWith D");
         System.out.println(playerRepository.findByNameStartingWith("D"));
         System.out.println("");
@@ -84,37 +85,39 @@ public class PlayerService {
         System.out.println("-----------------------");
         System.out.println("Player with name Lebron");
         System.out.println(playerRepository.findByName("Lebron"));
-        System.out.println("");
-
+        System.out.println("");*/
 
         System.out.println("[1]--------------------");
         System.out.println("Players order by points");
-        System.out.println("");
         System.out.println(playerRepository.findByOrderByPointsDesc());
+        System.out.println("");
 
         System.out.println("[2]------------------------------------------------");
         System.out.println("Players with greater or equal than url 5.000 points");
-        System.out.println("");
         System.out.println(playerRepository.findByPointsGreaterThan(5000));
+        System.out.println("");
 
         System.out.println("[3]---------------------------------------");
         System.out.println("Players with points between 5000 and 10000");
-        System.out.println("------------------------------------------");
         System.out.println(playerRepository.findByPointsBetween(5000, 10000));
+        System.out.println("");
 
         System.out.println("[4]--------------------------");
         System.out.println("Players order by position map");
-        System.out.println("-----------------------------");
         playerRepository.findAvgOfPointsAssistsReboundByPosition().
                 forEach(player -> System.out.println(player[3]+", avg baskets: "+player[0]+", avg assists: "+player[1]+", avg rebound: "+player[2]));
+        System.out.println("");
 
         System.out.println("[5]");
         System.out.println("Players order by ");
+        System.out.println("Run on restclient");
 
+        System.out.println("[6]");
+        System.out.println("Return by RequestParam");
+        System.out.println("Run on restclient");
 
         System.out.println("[7]------------------------");
         System.out.println("Min max avg by position map");
-        System.out.println("---------------------------");
         playerRepository.findAvgMinMaxOfPointsAssistsReboundByPosition().
                 forEach(aux -> System.out.println(aux[0] +
                         "\nBasket statistics -> avg: "+aux[1]+", max, "+aux[2]+", min "+aux[3]+

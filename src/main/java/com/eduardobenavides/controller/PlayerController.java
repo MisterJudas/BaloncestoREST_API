@@ -65,25 +65,25 @@ public class PlayerController {
     }
 
 
-    //Numero 1
+    // 1 - Devolver todos los jugadores ordenados por número de canastas.
     @GetMapping("/OrderByPoints")
     public List<Player> findAllOrderByPoints() {
         return playerRepository.findByOrderByPointsDesc();
     }
 
-    //Numero 2
+    // 2 - Devolver todos los jugadores que han conseguido un número de canastas igual o superior a un parámetro especificado en la URL.
     @GetMapping("/byPoints/{num}")
     public List<Player> findByPointsGreaterThan(@PathVariable Integer num) {
         return playerRepository.findByPointsGreaterThan(num);
     }
 
-    //Numero 3
+    // 3 - Devolver todos los jugadores que han conseguido un número de canastas en un rango determinado (mínimo y máximo).
     @GetMapping("/between/{points1}/{points2}")
     public List<Player>findByPointsBetween(@PathVariable Integer points1, @PathVariable Integer points2){
         return playerRepository.findByPointsBetween(points1, points2);
     }
 
-    //Numero 4 GET --> AVG BASKETS, ASSISTS, REBOUND FROM ALL PLAYERS SAME POSITION 4
+    // 4 - Devolver los jugadores agrupados por posición mediante un Map.
     @GetMapping("/byPosition")
     public Map<Position, Statistic> groupByPosition(){
         List<Object[]> players = playerRepository.groupByPosition();
@@ -97,31 +97,6 @@ public class PlayerController {
         return posis;
     }
 
-   /* @GetMapping("/byLocation")
-    public Map(<Location, Team> groupByLocation(){
-     List<Object[]> teams = teamRepository.groupByLocation();
-
-        Map<Location, Team> locat = new HashMap<>();
-
-        for (Object[] p: teams){
-            TeamController aux = new Team(Location p[0], (d))
-        }*/
-
-
-    // GET --> SHOW ALL THE PLAYERS WITH THE SAME POSITION ORDERED BY BASKETS 5
-    @GetMapping("/playersByPositionPoints")
-    public Map<Position, Collection<Player>> playersByPositionPoints(){
-        List<Player> players = playerRepository.playersByPositionPoints();
-
-        ListMultimap<Position, Player> playerMultiMap = ArrayListMultimap.create();
-
-        for(Player p: players){
-            playerMultiMap.put(p.getPosition(), p);
-        }
-
-        return playerMultiMap.asMap();
-    }
-
     @GetMapping
     public List<Player> findAllOrderBy(@RequestParam(name = "orderBy", required = false) String orderBy){
         if(orderBy != null) {
@@ -130,7 +105,25 @@ public class PlayerController {
         return playerRepository.findAll();
     }
 
-    //Numero 5 Sort by location
+    // 5 - Devolver los equipos agrupados por localidad mediante un Map.
+   @GetMapping("/playersByPositionPoints")
+    public Map<Position, Collection<Player>> playersByPositionPoints(){
+        ListMultimap<Position, Player> playerMultiMap = ArrayListMultimap.create();
+        playerRepository.playersByPositionPoints().forEach(
+                player -> playerMultiMap.put(player.getPosition(), player)
+        );
+        return playerMultiMap.asMap();
+    }
+
+    // 6 - Devolver todos los jugadores ordenados por un criterio @RequestParam
+    @GetMapping("/byParams")
+    public List<Player> orderByParam(@RequestParam(name = "orderBy") String orderBy){
+        if(orderBy != null) {
+            return playerRepository.findAll(new Sort(Sort.Direction.DESC, orderBy));
+        }
+        return playerRepository.findAll();
+    }
+
 
 
 

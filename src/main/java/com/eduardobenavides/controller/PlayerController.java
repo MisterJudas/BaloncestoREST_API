@@ -1,5 +1,6 @@
 package com.eduardobenavides.controller;
 
+import com.eduardobenavides.controller.util.HeaderUtil;
 import com.eduardobenavides.domain.Team;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -14,6 +15,8 @@ import com.eduardobenavides.domain.Position;
 import com.eduardobenavides.domain.Statistic;
 import com.eduardobenavides.repository.PlayerRepository;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -29,8 +32,18 @@ public class PlayerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Player createPlayer(@RequestBody Player player) {
-        return playerRepository.save(player);
+    public ResponseEntity<Player> createPlayer(@RequestBody Player player) throws URISyntaxException {
+        if (player.getId() != null) {
+            return ResponseEntity.
+                    badRequest().
+                    headers(
+                            HeaderUtil.
+                                    createFailureAlert("player", "idexists", "A new player cannot already have an ID")).body(null);
+        }
+        Player result = playerRepository.save(player);
+        return ResponseEntity.created(new URI("/players/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert("player", result.getId().toString()))
+                .body(result);
     }
 
    /* @GetMapping
@@ -41,8 +54,7 @@ public class PlayerController {
             players.add(iterator.next());
         }
         return players;
-    }*/
-
+    }
     // DELETE
     @DeleteMapping("/{id}")
     public void deletePlayerID(@PathVariable Long id){
@@ -54,16 +66,19 @@ public class PlayerController {
     @PutMapping
     public Player updatePlayer(@RequestBody Player player) {
         return playerRepository.save(player);
-    }
+    }*/
+
+
     // GET 1 PLAYER
     @GetMapping("/{id}")
-    public ResponseEntity<Player> getPlayerID(@PathVariable Long id){
+    public ResponseEntity<Player> findById(@PathVariable Long id){
         Player player = playerRepository.findOne(id);
-        return Optional.ofNullable(player)
-                .map(result -> new ResponseEntity<>(result, HttpStatus.OK))
-                .orElse(new ResponseEntity<Player>(HttpStatus.NOT_FOUND));
+        if (player!=null){
+            return new ResponseEntity<Player>(player,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<Player>(HttpStatus.NOT_FOUND);
+        }
     }
-
 
     // 1 - Devolver todos los jugadores ordenados por número de canastas.
     @GetMapping("/OrderByPoints")
